@@ -8,6 +8,9 @@ var schema = new Schema({
     lname: {
         type: String
     },
+    ip: {
+        type: String
+    },
 	email: {
         type: String
     },
