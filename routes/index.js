@@ -7,13 +7,10 @@ var getIP = require('ipware')().get_ip;
 router.get('/', function(req, res, next) {
   var ip = req.connection.remoteAddress
   var ipInfo = getIP(req);
-  console.log("IP: " + JSON.stringify(ipInfo));
-  Attendee.find({ip: ipInfo.clientIp}, function(err,adoc) {
-    console.log(JSON.stringify(adoc));
-    if (adoc.length) {
-      return res.redirect('/already');
-    }
-  })
+  var regd = req.cookies['pmug-registered-email'];
+  if (regd) {
+    return res.redirect('/already');    
+  }
   var title = "Please Sign In";
   res.render('register')
 })
@@ -38,6 +35,7 @@ router.post('/register', function(req, res, next) {
   myData.ip = ip
   myData.save()
     .then(item => {
+      res.cookie('pmug-registered-email', req.body.email);
       return res.redirect('/already');    
     })
     .catch(err => {
