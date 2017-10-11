@@ -24,7 +24,7 @@ router.get('/already', function(req, res, next) {
 router.get('/registration-desk', function(req, res, next) {
   var title = "Welcome to PhillyMUG October"
   Attendee.find({}, function(err, docs) {
-    res.render('index', {
+    res.render('registration-desk', {
         attendees: docs,
         title: title
     });
