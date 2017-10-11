@@ -83,4 +83,8 @@ router.post('/signin', function(req, res, next) {
     }
   })
 })
+router.get('/signout', function(req, res, next) {
+  res.clearCookie('pmug-registered-email');
+  return res.redirect('/');
+})
 module.exports = router;
