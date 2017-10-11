@@ -9,7 +9,8 @@ var schema = new Schema({
         type: String
     },
     ip: {
-        type: String
+        type: String,
+        required: false
     },
 	email: {
         type: String

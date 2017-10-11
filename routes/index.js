@@ -21,13 +21,7 @@ router.get('/already', function(req, res, next) {
   res.render('already');
 })
 /* Get Registration Desk */
-router.get('/registration', function(req, res, next) {
-  var ip = req.connection.remoteAddress
-  Attendee.find({ip: ip}, function(err,adoc) {
-    if (adoc) {
-      return res.redirect('already');
-    }
-  })
+router.get('/registration-desk', function(req, res, next) {
   var title = "Welcome to PhillyMUG October"
   Attendee.find({}, function(err, docs) {
     res.render('index', {
@@ -55,7 +49,7 @@ router.post('/msignin', function(req, res, next) {
   var myData = new Attendee(req.body);
   myData.save()
     .then(item => {
-      res.send("item saved to database");
+      return res.redirect('/registration-desk');    
     })
     .catch(err => {
       res.status(400).send("unable to save to database");
@@ -67,7 +61,7 @@ router.post('/delete', function(req, res, next) {
     if (err) {
       res.statusCode(400).send("Unable to delete");
     }
-    return res.redirect('/');    
+    return res.redirect('/registration-desk');    
   })
 })
 router.post('/signin', function(req, res, next) {

@@ -6,6 +6,7 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.17.1",
     "chalk": "^2.1.0",
     "cookie-parser": "~1.4.3",
@@ -14,8 +15,11 @@
     "hbs": "~4.0.1",
     "ipware": "^1.0.0",
     "mongoose": "^4.12.1",
+    "mongoose-simple-random": "^0.4.1",
     "morgan": "~1.8.1",
     "nodemon": "^1.12.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "serve-favicon": "~2.4.2"
   }
 }
