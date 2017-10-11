@@ -63,9 +63,7 @@ router.post('/msignin', function(req, res, next) {
 })
 router.post('/delete', function(req, res, next) {
   var id = req.body.id;
-  Attendee.remove({
-    _id: id
-  }, function(err, ) {
+  Attendee.remove({_id: id}, function(err, doc) {
     if (err) {
       res.statusCode(400).send("Unable to delete");
     }
