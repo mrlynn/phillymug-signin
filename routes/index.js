@@ -2,21 +2,24 @@ var express = require('express');
 var router = express.Router();
 var Attendee = require('../models/attendees.js');
 var ObjectId = require('mongoose').Types.ObjectId; 
-
+var getIP = require('ipware')().get_ip;
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var ip = req.connection.remoteAddress
-  console.log("IP: " + ip);
-  Attendee.find({ip: ip}, function(err,adoc) {
+  var ipInfo = getIP(req);
+  console.log("IP: " + JSON.stringify(ipInfo));
+  Attendee.find({ip: ipInfo.clientIp}, function(err,adoc) {
     console.log(JSON.stringify(adoc));
     if (adoc.length) {
-      return res.render('already');
+      return res.redirect('/already');
     }
   })
   var title = "Please Sign In";
   res.render('register')
 })
-
+router.get('/already', function(req, res, next) {
+  res.render('already');
+})
 /* Get Registration Desk */
 router.get('/registration', function(req, res, next) {
   var ip = req.connection.remoteAddress
