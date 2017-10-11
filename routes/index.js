@@ -38,7 +38,7 @@ router.post('/register', function(req, res, next) {
   myData.ip = ip
   myData.save()
     .then(item => {
-      return res.redirect('/');    
+      return res.redirect('/already');    
     })
     .catch(err => {
       res.status(400).send("unable to register " + JSON.stringify(err));
