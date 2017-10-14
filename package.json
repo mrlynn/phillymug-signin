@@ -9,17 +9,21 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.17.1",
     "chalk": "^2.1.0",
+    "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.3",
+    "dotenv": "^4.0.0",
     "express": "~4.15.2",
+    "express-session": "^1.15.6",
     "hbs": "~4.0.1",
     "ipware": "^1.0.0",
+    "mongodb-stitch": "^1.0.9",
     "mongoose": "^4.12.1",
     "mongoose-simple-random": "^0.4.1",
     "morgan": "~1.8.1",
     "nodemon": "^1.12.1",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
+    "passport-meetup": "^1.0.0",
     "serve-favicon": "~2.4.2"
   }
 }

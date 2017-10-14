@@ -3,7 +3,27 @@ var router = express.Router();
 var Attendee = require('../models/attendees.js');
 var ObjectId = require('mongoose').Types.ObjectId; 
 var getIP = require('ipware')().get_ip;
-/* GET home page. */
+var passport = require('passport');
+var passportMeetup = require( 'passport-meetup' );
+const stitch = require("mongodb-stitch")
+const client = new stitch.StitchClient('mugsignin-iszcm');
+
+/* Authenticate Stitch */
+
+client.authenticate('apiKey', process.env.apiKey).then(() => {
+  console.log('Successfully authenticated as ' + client.authedId());
+}).catch((err) => {
+  console.error('Error authenticating: ' + err);
+})
+
+const db = client.service('mongodb', 'mongodb-atlas').db('mugsignin');
+
+/* Let the Routing Begin! */
+var headerImageSource = process.env.headerImageSource;
+/*
+ Index
+*/
+
 router.get('/', function(req, res, next) {
   var ip = req.connection.remoteAddress
   var ipInfo = getIP(req);
@@ -12,14 +32,41 @@ router.get('/', function(req, res, next) {
     return res.redirect('/already');    
   }
   var title = "Please Sign In";
-  res.render('register')
+  res.render('register',{
+    headerImageSource: headerImageSource
+  })
 })
+router.get('/login', function(req, res, next) {
+  res.render('login/meetup',{
+    headerImageSource: headerImageSource
+  })
+})
+/*
+ Already registered
+*/
 router.get('/already', function(req, res, next) {
-  res.render('already');
+  res.render('already', {
+    headerImageSource: headerImageSource,
+    postLoginMessage: process.env.postLoginMessage
+  });
 })
-/* Get Registration Desk */
+/*
+ Registration Desk - used by someone running the MUG Event
+*/
 router.get('/registration-desk', function(req, res, next) {
   var title = "Welcome to PhillyMUG October"
+  // client.login().then(() =>
+  //   db.collection('attendees').find({})
+  //   ).then(docs => {
+  //     console.log("Found docs", docs)
+  //     console.log("[MongoDB Stitch] Connected to Stitch")
+  //     res.render('registration-desk', {
+  //       attendees: docs,
+  //       title: title
+  //     });
+  //   }).catch(err => {
+  //     console.error(err)
+  // });
   Attendee.find({}, function(err, docs) {
     res.render('registration-desk', {
         attendees: docs,
@@ -87,4 +134,30 @@ router.get('/signout', function(req, res, next) {
   res.clearCookie('pmug-registered-email');
   return res.redirect('/');
 })
+
+
+/* GET Meetup View Page */
+router.get('/meetup', function(req, res){
+  res.render('meetup', { user: req.user });
+});
+
+router.get('/auth/meetup',
+  passport.authenticate('meetup'),
+  function(req, res){
+  // The request will be redirected to Meetup for authentication, so this
+  // function will not be called.
+  }
+);
+router.get('/login/meetup',  
+  passport.authenticate('meetup')
+);
+
+// handle the callback after facebook has authenticated the user
+router.get('/login/meetup/callback',
+  passport.authenticate('meetup', {
+    successRedirect : '/meetup',
+    failureRedirect : '/'
+  })
+);
+
 module.exports = router;

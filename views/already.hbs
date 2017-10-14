@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script src="/javascripts/script.js"></script>
+<script src="https://s3.amazonaws.com/stitch-sdks/js/library/stable/stitch.min.js"></script>
 </head>
 <body>
 <div>
@@ -17,10 +18,10 @@
 <br/>
 <div class="jumbotron"> <p>
 </p>
-<img class="img-responsive" src="/images/header.png">
+<img class="img-responsive" src="{{headerImageSource}}">
 
 <h3>Thanks for signing in!</h3>
-<p>Be sure to tweet using the tags <b>@phillymug</b> and <b>#mongodb</b></p>
+<p>{{postLoginMessage}}</p>
 <form action='/signout' METHOD='GET'><button class="btn btn-warning btn-md" onClick="submit();">Sign Out</button></form>
 </div>
 </body>

@@ -26,9 +26,23 @@ var userSchema = new Schema({
 		type: String,
 		required: false
 	},
+	facebook: {
+		type: String,
+		required: false
+	},
+	meetup: {
+		type: String,
+		required: false
+	},
+	profile: {
+		name: String,
+		gender: String,
+		location: String,
+		website: String,
+		picture: String
+	},
 	tokens: Array
 });
-
 userSchema.pre('save', function(next) {
   var user = this;
   var SALT_FACTOR = 5;
