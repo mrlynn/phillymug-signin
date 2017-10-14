@@ -7,5 +7,9 @@ The app was designed with two primary interfaces:
 
 One for users to sign themselves in.  
 
+[Signin]: https://github.com/mrlynn/phillymug-signin/blob/master/public/images/screenshot-register.png "User Signin Screen"
 
 And another for someone that may be signing users in as they arrive.
+
+[Signin]: https://github.com/mrlynn/phillymug-signin/blob/master/public/images/screenshot-registration-desk.png "Registration Desk Signin Screen"
+
