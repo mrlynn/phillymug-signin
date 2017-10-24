@@ -70,6 +70,7 @@ router.get('/registration-desk', function(req, res, next) {
   Attendee.find({}, function(err, docs) {
     res.render('registration-desk', {
         attendees: docs,
+        headerImageSource: headerImageSource,        
         title: title
     });
   });
@@ -91,14 +92,22 @@ router.post('/register', function(req, res, next) {
 })
 /* Get Multi-signin */
 router.post('/msignin', function(req, res, next) {
-  var myData = new Attendee(req.body);
-  myData.save()
+  var ip = req.connection.remoteAddress  ;
+  rec = new Object();
+  rec.fname = req.body.fname;
+  rec.lname = req.body.lname;
+  rec.email = req.body.email;
+  rec.phone = req.body.phone;
+  rec.company = req.body.company;
+  console.log(JSON.stringify(rec));
+  var doc = new Attendee(rec);
+  doc.save()
     .then(item => {
-      return res.redirect('/registration-desk');    
+      return res.redirect('/registration-desk');
     })
     .catch(err => {
-      res.status(400).send("unable to save to database");
-    });
+      res.status(400).send("unable to really write" + JSON.stringify(err));
+  });
 })
 router.post('/delete', function(req, res, next) {
   var id = req.body.id;

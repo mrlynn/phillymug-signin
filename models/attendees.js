@@ -13,13 +13,16 @@ var schema = new Schema({
         required: false
     },
 	email: {
-        type: String
+        type: String,
+        required: false
     },
     company: {
-        type: String
+        type: String,
+        required: false
     },
     phone: {
-        type: String
+        type: String,
+        required: false
     },
 	created: {
 		type: Date,
