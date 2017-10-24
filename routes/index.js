@@ -99,6 +99,7 @@ router.post('/msignin', function(req, res, next) {
   rec.email = req.body.email;
   rec.phone = req.body.phone;
   rec.company = req.body.company;
+  rec.note = req.body.note;
   console.log(JSON.stringify(rec));
   var doc = new Attendee(rec);
   doc.save()

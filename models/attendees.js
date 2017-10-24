@@ -8,6 +8,10 @@ var schema = new Schema({
     lname: {
         type: String
     },
+    note: {
+        type: String,
+        required: false
+    },
     ip: {
         type: String,
         required: false
