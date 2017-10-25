@@ -110,6 +110,43 @@ router.post('/msignin', function(req, res, next) {
       res.status(400).send("unable to really write" + JSON.stringify(err));
   });
 })
+
+/* Get Multi-signin */
+router.post('/edit', function(req, res, next) {
+  var ip = req.connection.remoteAddress;
+  rec = new Object();
+  rec.fname = req.body.fname;
+  rec.lname = req.body.lname;
+  rec.email = req.body.email;
+  rec.phone = req.body.phone;
+  rec.company = req.body.company;
+  rec.note = req.body.note;
+  Attendee.findById(req.body.id,function(err,attendee) {
+    if (err) {
+      res.redirect('/');
+    }
+    attendee.fname = req.body.fname || attendee.fname;
+    attendee.lname = req.body.lname || attendee.lname;
+    attendee.company = req.body.company || attendee.company;
+    attendee.phone = req.body.phone || attendee.phone;
+    attendee.email = req.body.email || attendee.email;
+    attendee.note = req.body.note || attendee.note;
+    attendee.save(function(err, attendee) {
+      if (err) {
+        res.status(500).send(err)
+      }
+    })
+  });
+  console.log(JSON.stringify(rec));
+  var doc = new Attendee(rec);
+  doc.save()
+    .then(item => {
+      return res.redirect('/registration-desk');
+    })
+    .catch(err => {
+      res.status(400).send("unable to really write" + JSON.stringify(err));
+  });
+});
 router.post('/delete', function(req, res, next) {
   var id = req.body.id;
   Attendee.remove({_id: id}, function(err, doc) {
