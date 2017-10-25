@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var fs = require('fs');
+var json2csv = require('json2csv');
 var Attendee = require('../models/attendees.js');
 var ObjectId = require('mongoose').Types.ObjectId; 
 var getIP = require('ipware')().get_ip;
@@ -152,7 +154,16 @@ router.get('/api', function(req, res, next) {
     if (err) {
       res.statusCode(500).send("Unable to initiate api call");
     }
-    res.json(docs);
+    //res.json(docs);
+    var fields = ['fname','lname','phone','email','note','company'];
+    var csv = json2csv({ data: docs, fields: fields });
+    var path='./public/csv/file'+Date.now()+'.csv'; 
+    fs.writeFile(path, csv, function(err,docs) {
+      if (err) {throw err;}
+      else{ 
+        res.download(path); // This is what you need
+      }
+    }); 
   });
 });
 router.post('/delete', function(req, res, next) {
