@@ -147,6 +147,14 @@ router.post('/edit', function(req, res, next) {
       res.status(400).send("unable to really write" + JSON.stringify(err));
   });
 });
+router.get('/api', function(req, res, next) {
+  Attendee.find({},function(err,docs) {
+    if (err) {
+      res.statusCode(500).send("Unable to initiate api call");
+    }
+    res.json(docs);
+  });
+});
 router.post('/delete', function(req, res, next) {
   var id = req.body.id;
   Attendee.remove({_id: id}, function(err, doc) {
