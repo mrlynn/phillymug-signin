@@ -57,19 +57,13 @@ router.get('/already', function(req, res, next) {
 */
 router.get('/registration-desk', function(req, res, next) {
   var title = "Welcome to PhillyMUG October"
-  // client.login().then(() =>
-  //   db.collection('attendees').find({})
-  //   ).then(docs => {
-  //     console.log("Found docs", docs)
-  //     console.log("[MongoDB Stitch] Connected to Stitch")
-  //     res.render('registration-desk', {
-  //       attendees: docs,
-  //       title: title
-  //     });
-  //   }).catch(err => {
-  //     console.error(err)
-  // });
-  Attendee.find({}, function(err, docs) {
+  var page = parseInt(req.query.page),
+  size = parseInt(req.query.size),
+  skip = page > 0 ? ((page - 1) * size) : 0;
+  Attendee.find(null, null,{
+    skip: skip,
+    limit: size
+  }, function(err, docs) {
     res.render('registration-desk', {
         attendees: docs,
         headerImageSource: headerImageSource,        
