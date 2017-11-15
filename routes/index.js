@@ -57,6 +57,7 @@ router.get('/already', function(req, res, next) {
 */
 router.get('/registration-desk', function(req, res, next) {
   var title = "Welcome to PhillyMUG October"
+  var subtitle = process.env.subtitle;
   var page = parseInt(req.query.page),
   size = parseInt(req.query.size),
   skip = page > 0 ? ((page - 1) * size) : 0;
@@ -66,6 +67,7 @@ router.get('/registration-desk', function(req, res, next) {
   }, function(err, docs) {
     res.render('registration-desk', {
         attendees: docs,
+        subtitle: subtitle,
         headerImageSource: headerImageSource,        
         title: title
     });
