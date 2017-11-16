@@ -1,0 +1,85 @@
+schema:
+- db: test
+  tables:
+  - table: restaurants
+    collection: restaurants
+    pipeline: []
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: varchar
+    - Name: address.building
+      MongoType: string
+      SqlName: address.building
+      SqlType: varchar
+    - Name: address.street
+      MongoType: string
+      SqlName: address.street
+      SqlType: varchar
+    - Name: address.zipcode
+      MongoType: string
+      SqlName: address.zipcode
+      SqlType: varchar
+    - Name: borough
+      MongoType: string
+      SqlName: borough
+      SqlType: varchar
+    - Name: cuisine
+      MongoType: string
+      SqlName: cuisine
+      SqlType: varchar
+    - Name: name
+      MongoType: string
+      SqlName: name
+      SqlType: varchar
+    - Name: restaurant_id
+      MongoType: string
+      SqlName: restaurant_id
+      SqlType: varchar
+  - table: restaurants_address_coord
+    collection: restaurants
+    pipeline:
+    - $unwind:
+        includeArrayIndex: address.coord_idx
+        path: $address.coord
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: varchar
+    - Name: address.coord
+      MongoType: float64
+      SqlName: address.coord
+      SqlType: float64
+    - Name: address.coord_idx
+      MongoType: int
+      SqlName: address.coord_idx
+      SqlType: int
+  - table: restaurants_grades
+    collection: restaurants
+    pipeline:
+    - $unwind:
+        includeArrayIndex: grades_idx
+        path: $grades
+    columns:
+    - Name: _id
+      MongoType: bson.ObjectId
+      SqlName: _id
+      SqlType: varchar
+    - Name: grades.date
+      MongoType: date
+      SqlName: grades.date
+      SqlType: timestamp
+    - Name: grades.grade
+      MongoType: string
+      SqlName: grades.grade
+      SqlType: varchar
+    - Name: grades.score
+      MongoType: int
+      SqlName: grades.score
+      SqlType: int
+    - Name: grades_idx
+      MongoType: int
+      SqlName: grades_idx
+      SqlType: int

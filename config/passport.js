@@ -15,7 +15,7 @@ passport.deserializeUser(function(id, done) {
 passport.use('meetup', new MeetupStrategy({
     consumerKey: process.env.meetupAPIKey,
     consumerSecret: process.env.meetupAPISecret,
-    callbackURL: "/signin"
+    callbackURL: "/welcome"
   },
   function(token, tokenSecret, profile, done) {
     // asynchronous verification, for effect...

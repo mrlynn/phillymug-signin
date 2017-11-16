@@ -192,11 +192,11 @@ router.post('/signin', function(req, res, next) {
     }
   })
 })
+
 router.get('/signout', function(req, res, next) {
   res.clearCookie('pmug-registered-email');
   return res.redirect('/');
 })
-
 
 /* GET Meetup View Page */
 router.get('/meetup', function(req, res){
@@ -210,6 +210,16 @@ router.get('/auth/meetup',
   // function will not be called.
   }
 );
+
+router.get('/welcome', function(req, res){
+// The request will be redirected to Meetup for authentication, so this
+// function will not be called.
+  res.render('already', {
+    user: req.user,
+    headerImageSource: headerImageSource,
+    postLoginMessage: process.env.postLoginMessage
+  });
+});
 router.get('/login/meetup',  
   passport.authenticate('meetup')
 );
