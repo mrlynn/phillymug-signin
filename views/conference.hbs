@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{title}}</title>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.3/angular.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.3/angular-route.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/javascripts/script.js"></script>
+</head>
+<body>
+<div class="container">
+    <img class="img-responsive" src="{{headerImageSource}}">
+    <div class="container" id="message">
+        {{#if message}}
+        <h3>{{message}}</h3>
+        {{/if}}
+    </div>
+    <div class="row centered-form">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Please sign in <small></small></h3>
+                    <h4>{{subtitle}}</h4>
+                    </div>
+                    <div class="panel-body">
+                    <form role="form" action="/conference" method="POST">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                        <input type="text" name="fname" id="fname" class="form-control input-lg" placeholder="First Name" required="required">
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <input type="text" name="lname" id="lname" class="form-control input-lg" placeholder="Last Name" required="required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="company" name="company" id="company" class="form-control input-lg" placeholder="Company Name">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" class="form-control input-lg" placeholder="Email Address">
+                        </div>
+                        <div class="form-group">
+                            <input type="telephone" name="phone" id="phone" class="form-control input-lg" placeholder="Telephone">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="twitter" id="twitter" class="form-control input-lg" placeholder="Twitter - @yourhandle">
+                        </div>
+                        <button class="btn btn-success btn-block" onClick="submit();">Sign In</button>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
