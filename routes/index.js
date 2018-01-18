@@ -37,7 +37,14 @@ router.get('/', function(req, res, next) {
   res.render('register',{
     headerImageSource: headerImageSource
   })
-})
+});
+router.get('/conference', function(req, res, next) {
+  var title = "Please Sign In";
+  res.render('conference',{
+    headerImageSource: headerImageSource,
+    message: ''
+  })
+});
 router.get('/login', function(req, res, next) {
   res.render('login/meetup',{
     headerImageSource: headerImageSource
@@ -87,7 +94,24 @@ router.post('/register', function(req, res, next) {
     .catch(err => {
       res.status(400).send("unable to register " + JSON.stringify(err));
     });
-})
+});
+/* Receive post from an individual registrar */
+router.post('/conference', function(req, res, next) {
+  var myData = new Attendee(req.body);
+  console.log(JSON.stringify(myData));
+  var ip = req.connection.remoteAddress  
+  myData.ip = ip
+  myData.save()
+    .then(item => {
+      res.render('conference', {
+        message: "Thanks for Registering!",
+        headerImageSource: headerImageSource        
+      })
+    })
+    .catch(err => {
+      res.status(400).send("unable to register " + JSON.stringify(err));
+    });
+});
 /* Get Multi-signin */
 router.post('/msignin', function(req, res, next) {
   var ip = req.connection.remoteAddress  ;
