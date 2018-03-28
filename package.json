@@ -24,8 +24,6 @@
     "mongoose-simple-random": "^0.4.1",
     "morgan": "~1.8.1",
     "nodemon": "^1.12.1",
-    "passport": "^0.4.0",
-    "passport-meetup": "^1.0.0",
     "serve-favicon": "~2.4.2"
   }
 }

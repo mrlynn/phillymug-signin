@@ -5,8 +5,7 @@ var json2csv = require('json2csv');
 var Attendee = require('../models/attendees.js');
 var ObjectId = require('mongoose').Types.ObjectId; 
 var getIP = require('ipware')().get_ip;
-var passport = require('passport');
-var passportMeetup = require( 'passport-meetup' );
+
 const stitch = require("mongodb-stitch")
 const client = new stitch.StitchClient('mugsignin-iszcm');
 
@@ -227,13 +226,13 @@ router.get('/meetup', function(req, res){
   res.render('meetup', { user: req.user });
 });
 
-router.get('/auth/meetup',
-  passport.authenticate('meetup'),
-  function(req, res){
-  // The request will be redirected to Meetup for authentication, so this
-  // function will not be called.
-  }
-);
+// router.get('/auth/meetup',
+//   passport.authenticate('meetup'),
+//   function(req, res){
+//   // The request will be redirected to Meetup for authentication, so this
+//   // function will not be called.
+//   }
+// );
 
 router.get('/welcome', function(req, res){
 // The request will be redirected to Meetup for authentication, so this
@@ -244,16 +243,16 @@ router.get('/welcome', function(req, res){
     postLoginMessage: process.env.postLoginMessage
   });
 });
-router.get('/login/meetup',  
-  passport.authenticate('meetup')
-);
+// router.get('/login/meetup',  
+//   passport.authenticate('meetup')
+// );
 
 // handle the callback after facebook has authenticated the user
-router.get('/login/meetup/callback',
-  passport.authenticate('meetup', {
-    successRedirect : '/meetup',
-    failureRedirect : '/'
-  })
-);
+// router.get('/login/meetup/callback',
+//   passport.authenticate('meetup', {
+//     successRedirect : '/meetup',
+//     failureRedirect : '/'
+//   })
+// );
 
 module.exports = router;

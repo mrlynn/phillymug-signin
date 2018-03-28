@@ -6,7 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var passport = require('passport');
+//var passport = require('passport');
 var chalk = require('chalk');
 var flash = require('connect-flash');
 
@@ -34,12 +34,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({secret: 'mysuperpass', saveUninitialized: false, resave: false}));
 
-require('./config/passport');
+//require('./config/passport');
 
 app.use(flash());
 
-app.use(passport.initialize());
-app.use(passport.session());
+//app.use(passport.initialize());
+//app.use(passport.session());
 
 app.use('/', index);
 app.use('/users', users);
