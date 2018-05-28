@@ -20,7 +20,7 @@
     "ipware": "^1.0.0",
     "json2csv": "^3.11.5",
     "mongodb-stitch": "^1.0.9",
-    "mongoose": "^4.12.1",
+    "mongoose": "^4.13.14",
     "mongoose-simple-random": "^0.4.1",
     "morgan": "~1.8.1",
     "nodemon": "^1.17.5",
