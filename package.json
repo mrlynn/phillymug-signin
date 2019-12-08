@@ -22,7 +22,7 @@
     "mongodb-stitch": "1.2.0",
     "mongoose": "4.13.19",
     "mongoose-simple-random": "0.4.1",
-    "morgan": "1.8.2",
+    "morgan": "1.9.1",
     "nodemon": "1.19.4",
     "serve-favicon": "2.4.5"
   }
