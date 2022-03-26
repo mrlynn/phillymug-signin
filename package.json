@@ -18,7 +18,7 @@
     "express-session": "1.17.0",
     "hbs": "4.0.6",
     "ipware": "1.0.0",
-    "json2csv": "4.5.4",
+    "json2csv": "5.0.7",
     "mongodb-stitch": "3.6.0",
     "mongoose": "5.7.14",
     "mongoose-simple-random": "0.4.1",
